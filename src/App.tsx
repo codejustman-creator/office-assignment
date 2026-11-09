@@ -5,18 +5,32 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+// import { useEffect, useState } from "react";
+import CookieConsent from "./components/CookieConsent.tsx";
 
 
 
+const response = await fetch(
+  "http://localhost/your-app/session.php",
+  {
+    credentials: "include",
+  }
+);
 
+const data = await response.json();
+
+console.log(data.user);
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+const App = () => 
+
+<QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      {/* < CookieTest/> */}
+      <CookieConsent />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -25,9 +39,11 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </QueryClientProvider>
-  
+  // </QueryClientProvider>
  
-);
 
 export default App;
+
+
+
+
